@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pitch Details</title>
+</head>
+<body>
+
+<h2>{{ pitch.pitch_name }}</h2>
+
+<p><strong>Location:</strong> {{ pitch.location }}</p>
+<p><strong>Price:</strong> {{ pitch.price_per_hour }} EGP/hr</p>
+<p><strong>Description:</strong> {{ pitch.description }}</p>
+
+<a href="/booking/create/{{ pitch.pitch_id }}">Book This Pitch</a><br><br>
+<a href="/pitch/search">Back to Search</a>
+
+</body>
+</html>

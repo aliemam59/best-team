@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Pitches</title>
+</head>
+<body>
+
+<h2>Search Football Pitches</h2>
+
+<form method="GET" action="/pitch/search">
+    <label>Location:</label><br>
+    <input type="text" name="location" placeholder="Enter area..." required><br><br>
+
+    <button type="submit">Search</button>
+</form>
+
+{% if pitches %}
+    <h3>Results:</h3>
+    <ul>
+        {% for p in pitches %}
+            <li>
+                <strong>{{ p.pitch_name }}</strong><br>
+                Location: {{ p.location }}<br>
+                Price: {{ p.price_per_hour }} EGP/hr<br>
+                <a href="/pitch/{{ p.pitch_id }}">View Details</a>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+</body>
+</html>

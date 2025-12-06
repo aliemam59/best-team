@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Pitch</title>
+</head>
+<body>
+
+<h2>Book: {{ pitch.pitch_name }}</h2>
+
+<p><strong>Location:</strong> {{ pitch.location }}</p>
+<p><strong>Price:</strong> {{ pitch.price_per_hour }} EGP/hr</p>
+
+<form method="POST">
+
+    <label>Date:</label><br>
+    <input type="date" name="date" required><br><br>
+
+    <label>Time Slot:</label><br>
+    <select name="time_slot" required>
+        <option value="10:00 - 11:00">10:00 - 11:00</option>
+        <option value="11:00 - 12:00">11:00 - 12:00</option>
+        <option value="12:00 - 13:00">12:00 - 13:00</option>
+        <option value="13:00 - 14:00">13:00 - 14:00</option>
+        <option value="14:00 - 15:00">14:00 - 15:00</option>
+        <option value="15:00 - 16:00">15:00 - 16:00</option>
+    </select>
+    <br><br>
+
+    <button type="submit">Confirm Booking</button>
+</form>
+
+<br>
+<a href="/pitch/{{ pitch.pitch_id }}">Back to Pitch</a>
+
+</body>
+</html>
