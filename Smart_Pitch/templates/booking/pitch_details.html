@@ -1,0 +1,4 @@
+<h2>{{ pitch.name }}</h2>
+<p>Location: {{ pitch.location }}</p>
+<p>Price: {{ pitch.price }}</p>
+<a href="{{ url_for('booking.book_pitch', pitch_id=pitch.id) }}">Book Now</a>

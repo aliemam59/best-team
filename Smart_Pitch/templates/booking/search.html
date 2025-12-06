@@ -1,0 +1,17 @@
+<h2>Search Pitches</h2>
+<form method="POST">
+    <input type="text" name="location" placeholder="Location">
+    <button type="submit">Search</button>
+</form>
+
+{% if pitches %}
+<ul>
+    {% for pitch in pitches %}
+        <li>
+            <a href="{{ url_for('booking.pitch_details', pitch_id=pitch.id) }}">
+                {{ pitch.name }} - {{ pitch.location }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}
