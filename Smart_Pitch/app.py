@@ -6,9 +6,8 @@ from controllers.admin_controller import admin_bp
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = "smartpitch-secret"   # Simple session key
+    app.secret_key = "smartpitch-secret"   
 
-    # Register Blueprints (Controllers)
     app.register_blueprint(auth_bp)
     app.register_blueprint(owner_bp)
     app.register_blueprint(booking_bp)
