@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models.pitch import Pitch
-from . import db
+from Smart_Pitch import db
 
-owner_bp = Blueprint('owner', _name_)
+owner_bp = Blueprint('owner', __name__)
 
 @owner_bp.route('/owner/dashboard')
 def owner_dashboard():
