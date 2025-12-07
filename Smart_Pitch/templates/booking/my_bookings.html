@@ -1,0 +1,11 @@
+<h2>My Bookings</h2>
+<ul>
+    {% for booking in bookings %}
+        <li>
+            {{ booking.pitch.name }} - Status: {{ booking.status }}
+            {% if booking.status == 'active' %}
+                <a href="{{ url_for('booking.cancel_booking', booking_id=booking.id) }}">Cancel</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
