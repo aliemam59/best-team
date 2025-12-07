@@ -1,0 +1,25 @@
+<h1>Owner Dashboard</h1>
+<a href="{{ url_for('owner.add_pitch') }}">Add New Pitch</a>
+<table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+    {% for pitch in pitches %}
+    <tr>
+        <td>{{ pitch.name }}</td>
+        <td>{{ pitch.location }}</td>
+        <td>{{ pitch.type }}</td>
+        <td>{{ pitch.price }}</td>
+        <td>
+            <a href="{{ url_for('owner.edit_pitch', pitch_id=pitch.id) }}">Edit</a>
+            <form action="{{ url_for('owner.delete_pitch', pitch_id=pitch.id) }}" method="POST" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
