@@ -3,9 +3,9 @@ from models.admin import Admin
 from models.pitch import Pitch
 from models.booking import Booking
 from models.user import User
-from . import db
+from Smart_Pitch import db
 
-admin_bp = Blueprint('admin', _name_)
+admin_bp = Blueprint('admin', __name__)
 
 @admin_bp.route('/admin/dashboard')
 def admin_dashboard():
