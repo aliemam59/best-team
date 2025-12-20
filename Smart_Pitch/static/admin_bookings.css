@@ -1,0 +1,145 @@
+/* ===== GLOBAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f6fa;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: #fff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0aaa3c;
+}
+
+.logo span {
+    color: #000;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 0 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #333;
+}
+
+nav a.active {
+    background: #0aaa3c;
+    color: white;
+}
+
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logout {
+    color: #c0392b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* ===== MAIN ===== */
+.container {
+    padding: 40px;
+}
+
+.page-title {
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.page-desc {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* ===== TABLE ===== */
+.table-wrapper {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table th {
+    background: #f9f9f9;
+    color: #555;
+}
+
+.admin-table tr:hover {
+    background: #fafafa;
+}
+
+.center {
+    text-align: center;
+}
+
+/* ===== BADGES ===== */
+.badge {
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+}
+
+.badge.success {
+    background: #0aaa3c;
+}
+
+.badge.pending {
+    background: orange;
+}
+
+.badge.danger {
+    background: red;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #eee;
+    cursor: pointer;
+    font-weight: bold;
+    min-width: 90px;
+}
+
+.btn.danger {
+    background: #ffd6d6;
+    color: red;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

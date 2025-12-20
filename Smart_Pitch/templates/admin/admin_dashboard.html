@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+    <link rel="stylesheet" href="../../static/admin_dashboard.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <span>PitchBook</span> Admin
+    </div>
+
+    <nav>
+        <a href="admin_dashboard.html" class="active">Dashboard</a>
+        <a href="admin_users.html">Users</a>
+        <a href="admin_pitches.html">Pitches</a>
+        <a href="admin_bookings.html">Bookings</a>
+    </nav>
+
+    <div class="admin-info">
+        <span>Admin</span>
+        <a href="../auth/login.html" class="logout">Logout</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <h1>Dashboard Overview</h1>
+    <p class="subtitle">Quick summary of the system status</p>
+
+    <section class="stats">
+        <div class="stat-card">
+            <h3>Total Users</h3>
+            <p class="number">245</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Pitches</h3>
+            <p class="number">38</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Bookings</h3>
+            <p class="number">512</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Revenue</h3>
+            <p class="number">£12,450</p>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

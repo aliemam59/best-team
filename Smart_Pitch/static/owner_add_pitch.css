@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f4f6f8;
+    color: #333;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #ffffff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0aaa3c;
+}
+
+nav a {
+    margin: 0 12px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav a.active {
+    color: #0aaa3c;
+}
+
+.logout {
+    text-decoration: none;
+    background: #0aaa3c;
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* MAIN */
+.container {
+    max-width: 520px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.container h1 {
+    font-size: 30px;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* FORM */
+.pitch-form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.pitch-form label {
+    font-weight: bold;
+    margin-top: 16px;
+    display: block;
+}
+
+.pitch-form input,
+.pitch-form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.pitch-form input:focus,
+.pitch-form select:focus {
+    outline: none;
+    border-color: #0aaa3c;
+}
+
+/* BUTTON */
+.pitch-form button {
+    width: 100%;
+    margin-top: 28px;
+    padding: 14px;
+    background: #0aaa3c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pitch-form button:hover {
+    background: #088a31;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .container {
+        margin: 40px auto;
+    }
+}

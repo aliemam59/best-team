@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="../../static/dashboard.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+
+    <nav>
+        <a href="dashboard.html" class="active">Home</a>
+    </nav>
+
+    <div class="user">
+        <span>ahmed<br><small>user</small></span>
+        <a href="../auth/login.html" class="logout">Logout</a>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Find Your Perfect Pitch</h1>
+    <p>Search and book pitches in your area</p>
+</section>
+
+<!-- FILTER -->
+<section class="filter">
+    <input type="text" placeholder="Search by name or type...">
+    <select><option>All Locations</option></select>
+    <select><option>All Prices</option></select>
+    <select><option>All</option></select>
+</section>
+
+<p class="count">4 pitches found</p>
+
+<!-- CARDS -->
+<section class="cards">
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1622460132742-d218ff93958d">
+        <span class="badge green">Available</span>
+
+        <h3>Riverside Sports Complex</h3>
+        <p>📍 Manchester</p>
+        <p>👥 11-a-side • Full size</p>
+        <p>⏱ £50/hour</p>
+
+        <a href="../booking/pitch_details.html" class="btn">View Details</a>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1600130202712-fd01014ffa79">
+        <span class="badge green">Available</span>
+
+        <h3>City Center Arena</h3>
+        <p>📍 London</p>
+        <p>👥 7-a-side • Medium</p>
+        <p>⏱ £80/hour</p>
+
+        <a href="../booking/pitch_details.html" class="btn">View Details</a>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1708472329334-c0550c39dba6">
+        <span class="badge green">Available</span>
+
+        <h3>Green Park Pitch</h3>
+        <p>📍 Birmingham</p>
+        <p>👥 5-a-side • Small</p>
+        <p>⏱ £40/hour</p>
+
+        <a href="../booking/pitch_details.html" class="btn">View Details</a>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1712325485668-6b6830ba814e">
+        <span class="badge red">No slots</span>
+
+        <h3>Elite Indoor Sports</h3>
+        <p>📍 Manchester</p>
+        <p>👥 5-a-side • Small</p>
+        <p>⏱ £65/hour</p>
+
+        <p class="desc">Premium indoor facility with climate control</p>
+
+        <button disabled>View Only</button>
+    </div>
+
+</section>
+
+</body>
+</html>

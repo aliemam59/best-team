@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Owner Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='owner_dashboard.css') }}">
+    <link rel="stylesheet" href="../../static/owner_dashboard.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+
+    <nav>
+        <a href="owner_dashboard.html" class="active">Dashboard</a>
+        <a href="owner_add_pitch.html">Add Pitch</a>
+    </nav>
+
+    <a href="../auth/login.html" class="logout">Logout</a>
+</header>
+
+<main class="container">
+
+    <h1>Welcome, Pitch Owner</h1>
+    <p class="subtitle">Manage your pitches easily</p>
+
+    <section class="cards">
+
+        <div class="card">
+            <h3>Riverside Sports Complex</h3>
+            <p>📍 Manchester</p>
+            <p>£50 / hour</p>
+            <a href="owner_edit_pitch.html" class="btn">Edit Pitch</a>
+        </div>
+
+        <div class="card">
+            <h3>City Center Arena</h3>
+            <p>📍 London</p>
+            <p>£80 / hour</p>
+            <a href="owner_edit_pitch.html" class="btn">Edit Pitch</a>
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>

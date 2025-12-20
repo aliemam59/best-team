@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PitchBook</title>
+
+    <!-- Flask static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+    <nav>
+        <a href="{{ url_for('auth.login') }}">Login</a>
+        <a href="{{ url_for('auth.login') }}" class="btn">Create Account</a>
+    </nav>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>Find & Book Football Pitches Easily</h1>
+        <p>
+            PitchBook helps you discover football pitches near you,
+            check availability, and book instantly.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="{{ url_for('auth.login') }}" class="primary-btn">Log In</a>
+            <a href="{{ url_for('auth.login') }}" class="secondary-btn">Create Account</a>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1600679472829-3044539ce8ed?auto=format&fit=crop&w=1200&q=80" alt="Football Pitch">
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+    <div class="feature">
+        <h3>🔍 Search Easily</h3>
+        <p>Find football pitches by location, size, and price.</p>
+    </div>
+
+    <div class="feature">
+        <h3>⚡ Instant Booking</h3>
+        <p>Book available time slots instantly with no hassle.</p>
+    </div>
+
+    <div class="feature">
+        <h3>📊 Manage Everything</h3>
+        <p>Owners can manage pitches and bookings from one dashboard.</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2025 PitchBook. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

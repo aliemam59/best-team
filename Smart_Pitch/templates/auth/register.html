@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+    <link rel="stylesheet" href="../../static/register.css">
+</head>
+<body>
+
+<!-- BACK -->
+<a href="login.html" class="back-btn">← Back</a>
+
+<!-- CARD -->
+<div class="auth-container">
+    <h1>Create Account</h1>
+
+    <!-- FORM -->
+    <form action="login.html" method="get">
+
+        <label>Full Name</label>
+        <input type="text" placeholder="Ahmed" required>
+
+        <label>Email</label>
+        <input type="email" placeholder="ahmed@gmail.com" required>
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter password" required>
+
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Confirm password" required>
+
+        <label class="section-title">Account Type</label>
+
+        <div class="account-types">
+
+            <label class="type-card">
+                <input type="radio" name="account_type" checked>
+                <div>
+                    <strong>Regular User</strong>
+                    <p>Book pitches for your games</p>
+                </div>
+            </label>
+
+            <label class="type-card">
+                <input type="radio" name="account_type">
+                <div>
+                    <strong>Pitch Owner</strong>
+                    <p>List and manage your pitches</p>
+                </div>
+            </label>
+
+        </div>
+
+        <button type="submit" class="main-btn">
+            Create Account
+        </button>
+
+    </form>
+</div>
+
+</body>
+</html>

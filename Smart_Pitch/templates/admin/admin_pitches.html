@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Pitches</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_pitches.css') }}">
+    <link rel="stylesheet" href="../../static/admin_pitches.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        PitchBook <span>Admin</span>
+    </div>
+
+    <nav>
+        <a href="admin_dashboard.html">Dashboard</a>
+        <a href="admin_users.html">Users</a>
+        <a href="admin_pitches.html" class="active">Pitches</a>
+        <a href="admin_bookings.html">Bookings</a>
+    </nav>
+
+    <div class="admin-info">
+        <strong>Admin</strong>
+        <a href="../auth/login.html" class="logout">Logout</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <h1 class="page-title">Pitches Management</h1>
+    <p class="page-desc">Review and manage all registered pitches</p>
+
+    <div class="table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Pitch Name</th>
+                    <th>Owner</th>
+                    <th>Location</th>
+                    <th>Price / Hour</th>
+                    <th>Status</th>
+                    <th class="center">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Riverside Sports Complex</td>
+                    <td>Ahmed Ali</td>
+                    <td>Manchester</td>
+                    <td>£50</td>
+                    <td><span class="badge pending">Pending</span></td>
+                    <td class="center">
+                        <button class="btn success">Approve</button>
+                        <button class="btn danger">Reject</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>City Center Arena</td>
+                    <td>Mohamed Samy</td>
+                    <td>London</td>
+                    <td>£80</td>
+                    <td><span class="badge success">Approved</span></td>
+                    <td class="center">
+                        <button class="btn" disabled>Approved</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Elite Indoor Sports</td>
+                    <td>Omar Hassan</td>
+                    <td>Birmingham</td>
+                    <td>£65</td>
+                    <td><span class="badge danger">Rejected</span></td>
+                    <td class="center">
+                        <button class="btn" disabled>Rejected</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>

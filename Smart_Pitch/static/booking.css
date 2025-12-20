@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f6fa;
+}
+
+/* Navbar */
+.navbar {
+    background: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0aaa3c;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #0aaa3c;
+    font-weight: bold;
+}
+
+/* Main */
+.container {
+    padding: 60px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Booking Card */
+.booking-card,
+.success-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    width: 420px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.booking-card p {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+/* Title */
+.title {
+    margin-bottom: 30px;
+}
+
+/* Button */
+.confirm-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background: #0aaa3c;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.confirm-btn:hover {
+    background: #088a31;
+}

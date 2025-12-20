@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="../../static/login.css">
+</head>
+<body>
+
+<!-- BACK -->
+<a href="../index.html" class="back-btn">← Back</a>
+
+<!-- LOGIN CARD -->
+<div class="auth-container">
+
+    <h1>Log In</h1>
+
+    <label>Email</label>
+    <input type="email" placeholder="ahmed@gmail.com">
+
+    <label>Password</label>
+    <input type="password" placeholder="password">
+
+    <!-- LOGIN BUTTONS -->
+    <a href="../user/dashboard.html" class="btn user-btn">
+        Log in as User
+    </a>
+
+    <a href="../owner/owner_dashboard.html" class="btn owner-btn">
+        Log in as Pitch Owner
+    </a>
+
+    <a href="../admin/admin_dashboard.html" class="btn admin-btn">
+        Log in as Admin
+    </a>
+
+    <!-- DEMO -->
+    <div class="demo">
+        <strong>Demo Accounts</strong><br>
+        User: user@demo.com<br>
+        Owner: owner@demo.com<br>
+        Admin: admin@demo.com<br>
+        Password: password
+    </div>
+
+</div>
+
+</body>
+</html>

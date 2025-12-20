@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Bookings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_bookings.css') }}">
+    <link rel="stylesheet" href="../../static/admin_bookings.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        PitchBook <span>Admin</span>
+    </div>
+
+    <nav>
+        <a href="admin_dashboard.html">Dashboard</a>
+        <a href="admin_users.html">Users</a>
+        <a href="admin_pitches.html">Pitches</a>
+        <a href="admin_bookings.html" class="active">Bookings</a>
+    </nav>
+
+    <div class="admin-info">
+        <strong>Admin</strong>
+        <a href="../auth/login.html" class="logout">Logout</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <h1 class="page-title">Bookings Management</h1>
+    <p class="page-desc">View and manage all pitch bookings</p>
+
+    <div class="table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Pitch</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th class="center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ahmed Ali</td>
+                    <td>Riverside Sports Complex</td>
+                    <td>20 Dec 2025</td>
+                    <td>18:00 - 20:00</td>
+                    <td>£100</td>
+                    <td><span class="badge success">Confirmed</span></td>
+                    <td class="center"><button class="btn danger">Cancel</button></td>
+                </tr>
+
+                <tr>
+                    <td>Mohamed Samy</td>
+                    <td>City Center Arena</td>
+                    <td>22 Dec 2025</td>
+                    <td>16:00 - 18:00</td>
+                    <td>£80</td>
+                    <td><span class="badge pending">Pending</span></td>
+                    <td class="center"><button class="btn">View</button></td>
+                </tr>
+
+                <tr>
+                    <td>Omar Hassan</td>
+                    <td>Elite Indoor Sports</td>
+                    <td>25 Dec 2025</td>
+                    <td>14:00 - 15:00</td>
+                    <td>£65</td>
+                    <td><span class="badge danger">Cancelled</span></td>
+                    <td class="center"><button class="btn" disabled>View</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>

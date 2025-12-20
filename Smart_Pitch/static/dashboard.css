@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f6f6f6;
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo {
+    color: #0aaa3c;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+nav a.active {
+    background: #0aaa3c;
+    color: white;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout {
+    color: red;
+    text-decoration: none;
+}
+
+/* HERO */
+.hero {
+    padding: 40px;
+}
+
+.hero p {
+    color: #555;
+    margin-top: 10px;
+}
+
+/* FILTER */
+.filter {
+    background: white;
+    margin: 0 40px;
+    padding: 20px;
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.filter input,
+.filter select {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* COUNT */
+.count {
+    margin: 20px 40px;
+    color: #444;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 0 40px 40px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: white;
+}
+
+.green {
+    background: #0aaa3c;
+}
+
+.red {
+    background: red;
+}
+
+.card h3 {
+    margin-top: 12px;
+}
+
+.card p {
+    margin-top: 6px;
+    color: #444;
+}
+
+.desc {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #eee;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}

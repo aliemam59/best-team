@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f4f6f8;
+    color: #333;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #ffffff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.logo {
+    color: #0aaa3c;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.back {
+    text-decoration: none;
+    color: #0aaa3c;
+    font-weight: bold;
+}
+
+/* MAIN */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+/* TITLE */
+h1 {
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+/* FORM CARD */
+.form {
+    background: #ffffff;
+    padding: 35px;
+    width: 380px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* LABELS */
+label {
+    display: block;
+    margin-top: 16px;
+    font-weight: bold;
+}
+
+/* INPUTS */
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #0aaa3c;
+}
+
+/* BUTTON */
+button {
+    margin-top: 28px;
+    width: 100%;
+    padding: 14px;
+    background: #0aaa3c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #088a31;
+}
