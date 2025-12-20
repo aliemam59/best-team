@@ -1,14 +1,13 @@
 from flask import Flask
-from controllers.auth_controller import auth_bp
-from controllers.owner_controller import owner_bp
-from controllers.booking_controller import booking_bp
-from controllers.admin_controller import admin_bp
+from controllers.auth import auth_bp
+from controllers.owner import owner_bp
+from controllers.booking import booking_bp
+from controllers.admin import admin_bp
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = "smartpitch-secret"   # Simple session key
+    app.secret_key = "super-secret-key"
 
-    # Register Blueprints (Controllers)
     app.register_blueprint(auth_bp)
     app.register_blueprint(owner_bp)
     app.register_blueprint(booking_bp)
@@ -16,10 +15,9 @@ def create_app():
 
     @app.route("/")
     def home():
-        return "Welcome to Smart Pitch!"
+        return "Pitch Booking System Running"
 
     return app
-
 
 if __name__ == "__main__":
     app = create_app()
