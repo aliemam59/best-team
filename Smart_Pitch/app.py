@@ -9,7 +9,7 @@ from controllers.admin_controller import admin_bp
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = "super-secret-key"
+    app.secret_key = "smartpitch-secret"
 
     # Register Blueprints
     app.register_blueprint(auth_bp)
