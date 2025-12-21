@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Pitches</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_pitches.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        PitchBook <span>Admin</span>
+    </div>
+
+    <nav>
+        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('admin.users') }}">Users</a>
+        <a href="{{ url_for('admin.pitches') }}" class="active">Pitches</a>
+        <a href="{{ url_for('admin.bookings') }}">Bookings</a>
+    </nav>
+
+    <div class="admin-info">
+        <strong>Admin</strong>
+        <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <h1 class="page-title">Pitches Management</h1>
+    <p class="page-desc">Review and manage all registered pitches</p>
+
+    <div class="table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Pitch Name</th>
+                    <th>Owner</th>
+                    <th>Location</th>
+                    <th>Price / Hour</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for p in pitches %}
+                {% set status = (p.status if p.status is defined else p["status"]) %}
+                {% set badge_class = "pending" if status in ["Pending"] else ("success" if status in ["Approved","Confirmed"] else "danger") %}
+                <tr>
+                    <td>{{ p.name if p.name is defined else p["name"] }}</td>
+                    <td>{{ p.owner if p.owner is defined else p["owner"] }}</td>
+                    <td>{{ p.location if p.location is defined else p["location"] }}</td>
+                    <td>£{{ p.price if p.price is defined else p["price"] }}</td>
+                    <td><span class="badge {{ badge_class }}">{{ status }}</span></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>
