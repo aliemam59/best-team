@@ -1,47 +1,61 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from models.pitch import Pitch
-from Smart_Pitch import db
+from flask import Blueprint, render_template, session, redirect, url_for, request
 
-owner_bp = Blueprint('owner', __name__)
+owner_bp = Blueprint(
+    "owner",
+    __name__,
+    url_prefix="/owner"
+)
 
-@owner_bp.route('/owner/dashboard')
-def owner_dashboard():
-    owner_id = 1
-    pitches = Pitch.query.filter_by(owner_id=owner_id).all()
-    return render_template('owner_dashboard.html', pitches=pitches)
+@owner_bp.route("/dashboard")
+def dashboard():
+    if session.get("role") != "owner":
+        return redirect(url_for("auth.login"))
 
-@owner_bp.route('/owner/add', methods=['GET', 'POST'])
+    from Smart_Pitch.models.pitch import Pitch
+    owner_email = session.get("email")
+    pitches = [p for p in Pitch.get_all() if p.get("owner") == owner_email]
+
+    return render_template("owner/owner_dashboard.html", pitches=pitches)
+
+@owner_bp.route("/add-pitch", methods=["GET","POST"])
 def add_pitch():
-    if request.method == 'POST':
-        name = request.form['name']
-        location = request.form['location']
-        type_ = request.form['type']
-        price = request.form['price']
-        owner_id = 1
-        new_pitch = Pitch(name=name, location=location, type=type_, price=price, owner_id=owner_id)
-        db.session.add(new_pitch)
-        db.session.commit()
-        flash('Pitch added successfully!')
-        return redirect(url_for('owner.owner_dashboard'))
-    return render_template('owner_add_pitch.html')
+    if session.get("role") != "owner":
+        return redirect(url_for("auth.login"))
 
-@owner_bp.route('/owner/edit/<int:pitch_id>', methods=['GET', 'POST'])
-def edit_pitch(pitch_id):
-    pitch = Pitch.query.get_or_404(pitch_id)
-    if request.method == 'POST':
-        pitch.name = request.form['name']
-        pitch.location = request.form['location']
-        pitch.type = request.form['type']
-        pitch.price = request.form['price']
-        db.session.commit()
-        flash('Pitch updated successfully!')
-        return redirect(url_for('owner.owner_dashboard'))
-    return render_template('owner_edit_pitch.html', pitch=pitch)
+    if request.method == "POST":
+        name = (request.form.get("name") or "").strip()
+        location = (request.form.get("location") or "").strip()
+        price = float(request.form.get("price") or 0)
+        owner = session.get("email") or "Unknown"
 
-@owner_bp.route('/owner/delete/<int:pitch_id>', methods=['POST'])
-def delete_pitch(pitch_id):
-    pitch = Pitch.query.get_or_404(pitch_id)
-    db.session.delete(pitch)
-    db.session.commit()
-    flash('Pitch deleted successfully!')
-    return redirect(url_for('owner.owner_dashboard'))
+        from Smart_Pitch.models.pitch import Pitch
+        Pitch.add(name, location, price, owner)
+
+        return redirect(url_for("owner.dashboard"))
+
+    return render_template("owner/owner_add_pitch.html")
+
+@owner_bp.route("/edit-pitch", methods=["GET","POST"])
+def edit_pitch():
+    if session.get("role") != "owner":
+        return redirect(url_for("auth.login"))
+
+    pitch_id = request.args.get("id")
+    if not pitch_id:
+        return redirect(url_for("owner.dashboard"))
+
+    from Smart_Pitch.models.pitch import Pitch
+    p = Pitch.get_by_id(int(pitch_id))
+    if not p or p.get("owner") != session.get("email"):
+        return redirect(url_for("owner.dashboard"))
+
+    if request.method == "POST":
+        name = (request.form.get("name") or "").strip()
+        location = (request.form.get("location") or "").strip()
+        price = float(request.form.get("price") or 0)
+        status = (request.form.get("status") or p.get("status"))
+
+        Pitch.update(int(pitch_id), name, location, price, p.get("owner"), status=status)
+        return redirect(url_for("owner.dashboard"))
+
+    return render_template("owner/owner_edit_pitch.html", pitch=p)
