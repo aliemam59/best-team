@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_users.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        PitchBook <span>Admin</span>
+    </div>
+
+    <nav>
+        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('admin.users') }}" class="active">Users</a>
+        <a href="{{ url_for('admin.pitches') }}">Pitches</a>
+        <a href="{{ url_for('admin.bookings') }}">Bookings</a>
+    </nav>
+
+    <div class="admin-info">
+        <strong>Admin</strong>
+        <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <h1 class="page-title">Users Management</h1>
+    <p class="page-desc">View and manage system users</p>
+
+    <div class="table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for u in users %}
+                <tr>
+                    <td>{{ u.id if u.id is defined else u["id"] }}</td>
+                    <td>{{ u.email if u.email is defined else u["email"] }}</td>
+                    <td>{{ u.role if u.role is defined else u["role"] }}</td>
+                    <td><span class="badge success">Active</span></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>
