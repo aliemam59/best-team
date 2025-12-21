@@ -1,11 +1,55 @@
-<h2>My Bookings</h2>
-<ul>
-    {% for booking in bookings %}
-        <li>
-            {{ booking.pitch.name }} - Status: {{ booking.status }}
-            {% if booking.status == 'active' %}
-                <a href="{{ url_for('booking.cancel_booking', booking_id=booking.id) }}">Cancel</a>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='booking.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+
+    <nav>
+        <a href="{{ url_for('user.dashboard') }}">Home</a>
+        <a href="{{ url_for('booking.search') }}">Search</a>
+        <a href="{{ url_for('booking.my_bookings') }}" class="active">My Bookings</a>
+    </nav>
+
+    <div class="user">
+        <span>{{ session.get('email','user') }}<br><small>{{ session.get('role','user') }}</small></span>
+        <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+    </div>
+</header>
+
+<section class="container">
+    <div class="booking-card title">
+        <h1>My Bookings</h1>
+        <p class="page-desc">View and manage your bookings</p>
+    </div>
+
+    {% if bookings %}
+    <div class="bookings-list">
+        {% for b in bookings %}
+        <div class="booking-card">
+            <h3>{{ b.pitch_name if b.pitch_name is defined else b['pitch'] }}</h3>
+            <p><strong>Date:</strong> {{ b.date }} &nbsp; <strong>Time:</strong> {{ b.time }}</p>
+            <p><strong>Status:</strong> {{ b.status }}</p>
+            <p><strong>Price:</strong> £{{ b.price }}</p>
+
+            <form method="POST" action="{{ url_for('booking.cancel_booking', booking_id=b.id) }}" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                <button class="cancel-btn" type="submit">Cancel Booking</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="booking-card">
+        <p>You have no bookings yet.</p>
+        <a href="{{ url_for('booking.search') }}" class="confirm-btn">Search Pitches</a>
+    </div>
+    {% endif %}
+</section>
+
+</body>
+</html>
