@@ -1,46 +1,65 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from models.user import User
+from Smart_Pitch.models.user import User
 
-auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
+auth_bp = Blueprint("auth", __name__)
+
+
+@auth_bp.route("/")
+def index():
+    return render_template("index.html")
 
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form["email"]
-        password = request.form["password"]
+        email = (request.form.get("email") or "").strip()
+        password = request.form.get("password") or ""
 
-        user = User.get_by_login(email, password)
+        user = User.login(email, password)
+
         if user:
-            session["user_id"] = user["user_id"]
+            session["user_id"] = user["id"]
+            session["email"] = user["email"]
             session["role"] = user["role"]
-            session["name"] = user["full_name"]
-            return redirect(url_for("auth.dashboard"))
 
-        return "Invalid email or password."
+            if user["role"] == "user":
+                return redirect(url_for("user.dashboard"))
+            elif user["role"] == "owner":
+                return redirect(url_for("owner.dashboard"))
+            elif user["role"] == "admin":
+                return redirect(url_for("admin.dashboard"))
+
+            return redirect(url_for("auth.index"))
+
+        return render_template("auth/login.html", error="Invalid credentials")
 
     return render_template("auth/login.html")
 
 
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Simple in-memory register (for prototype).
+    Creates a normal 'user' role account.
+    """
     if request.method == "POST":
-        name = request.form["name"]
-        email = request.form["email"]
-        password = request.form["password"]
+        email = (request.form.get("email") or "").strip()
+        password = request.form.get("password") or ""
 
-        User.create(name, email, password)
+
+        if not email or not password:
+            return render_template("auth/register.html", error="Email and password are required")
+
+        exists = any(u["email"].lower() == email.lower() for u in User.users)
+        if exists:
+            return render_template("auth/register.html", error="Email already exists")
+
+        new_id = max((u["id"] for u in User.users), default=0) + 1
+        User.users.append({"id": new_id, "email": email, "password": password, "role": "user"})
+
         return redirect(url_for("auth.login"))
 
     return render_template("auth/register.html")
-
-
-@auth_bp.route("/dashboard")
-def dashboard():
-    if "user_id" not in session:
-        return redirect(url_for("auth.login"))
-
-    return render_template("user/dashboard.html", name=session["name"])
 
 
 @auth_bp.route("/logout")
