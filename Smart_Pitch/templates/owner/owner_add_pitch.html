@@ -1,9 +1,51 @@
-<h1>Add New Pitch</h1>
-<form method="POST">
-    Name: <input type="text" name="name" required><br>
-    Location: <input type="text" name="location" required><br>
-    Type: <input type="text" name="type" required><br>
-    Price: <input type="number" name="price" required><br>
-    <button type="submit">Add Pitch</button>
-</form>
-<a href="{{ url_for('owner.owner_dashboard') }}">Back to Dashboard</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Pitch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='owner_add_pitch.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+
+    <nav>
+        <a href="{{ url_for('owner.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('owner.add_pitch') }}" class="active">Add Pitch</a>
+    </nav>
+
+    <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+</header>
+
+<main class="container">
+
+    <h1>Add New Pitch</h1>
+    <p class="subtitle">Fill the details below to add a new pitch</p>
+
+    <form class="pitch-form" action="{{ url_for('owner.add_pitch') }}" method="POST">
+
+        <label>Pitch Name</label>
+        <input type="text" name="name" placeholder="Pitch name" required>
+
+        <label>Location</label>
+        <input type="text" name="location" placeholder="City" required>
+
+        <label>Price per Hour (£)</label>
+        <input type="number" name="price" placeholder="Price" required>
+
+        <label>Pitch Size</label>
+        <select name="size" required>
+            <option value="5">5-a-side</option>
+            <option value="7">7-a-side</option>
+            <option value="11">11-a-side</option>
+        </select>
+
+        <button type="submit">Add Pitch</button>
+
+    </form>
+
+</main>
+
+</body>
+</html>
