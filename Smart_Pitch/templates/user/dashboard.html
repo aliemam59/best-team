@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 </head>
 <body>
 
-<h2>Welcome, {{ name }}!</h2>
+<header class="navbar">
+    <div class="logo">PitchBook</div>
 
-<p>You are now logged in.</p>
+    <nav>
+        <a href="{{ url_for('user.dashboard') }}" class="active">Home</a>
+        <a href="{{ url_for('booking.search') }}">Search</a>
+        <a href="{{ url_for('booking.my_bookings') }}">My Bookings</a>
+    </nav>
 
-<a href="/auth/logout">Logout</a>
+    <div class="user">
+        <span>{{ session.get('email','user') }}<br><small>{{ session.get('role','user') }}</small></span>
+        <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Find Your Perfect Pitch</h1>
+    <p>Search and book pitches in your area</p>
+</section>
+
+<section class="filter">
+    <input type="text" placeholder="Search by name or type...">
+    <select><option>All Locations</option></select>
+    <select><option>All Prices</option></select>
+    <select><option>All</option></select>
+</section>
+
+
+<section class="cards">
+
+    {% for p in pitches %}
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1622460132742-d218ff93958d">
+        <span class="badge {{ 'green' if p.status in ['Approved','Confirmed'] else 'pending' }}">{{ p.status }}</span>
+
+        <h3>{{ p.name }}</h3>
+        <p>📍 {{ p.location }}</p>
+        <p>👥 Pitch details</p>
+        <p>⏱ £{{ p.price }}/hour</p>
+
+        <a href="{{ url_for('booking.pitch_details', id=p.id) }}" class="btn">View Details</a>
+    </div>
+    {% endfor %}
+
+</section>
 
 </body>
 </html>
