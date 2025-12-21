@@ -1,25 +1,49 @@
-<h1>Owner Dashboard</h1>
-<a href="{{ url_for('owner.add_pitch') }}">Add New Pitch</a>
-<table border="1" cellpadding="5" cellspacing="0">
-    <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Type</th>
-        <th>Price</th>
-        <th>Actions</th>
-    </tr>
-    {% for pitch in pitches %}
-    <tr>
-        <td>{{ pitch.name }}</td>
-        <td>{{ pitch.location }}</td>
-        <td>{{ pitch.type }}</td>
-        <td>{{ pitch.price }}</td>
-        <td>
-            <a href="{{ url_for('owner.edit_pitch', pitch_id=pitch.id) }}">Edit</a>
-            <form action="{{ url_for('owner.delete_pitch', pitch_id=pitch.id) }}" method="POST" style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Owner Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='owner_dashboard.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+
+    <nav>
+        <a href="{{ url_for('owner.dashboard') }}" class="active">Dashboard</a>
+        <a href="{{ url_for('owner.add_pitch') }}">Add Pitch</a>
+    </nav>
+
+    <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+</header>
+
+<main class="container">
+
+    <h1>Welcome, Pitch Owner</h1>
+    <p class="subtitle">Manage your pitches easily</p>
+
+    <section class="cards">
+
+        {% if pitches %}
+            {% for p in pitches %}
+            <div class="card">
+                <h3>{{ p.name }}</h3>
+                <p>📍 {{ p.location }}</p>
+                <p>£{{ p.price }} / hour</p>
+                <a href="{{ url_for('owner.edit_pitch', id=p.id) }}" class="btn">Edit Pitch</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="card">
+                <p>You have not added any pitches yet.</p>
+                <a href="{{ url_for('owner.add_pitch') }}" class="btn">Add a Pitch</a>
+            </div>
+        {% endif %}
+
+    </section>
+
+</main>
+
+</body>
+</html>
