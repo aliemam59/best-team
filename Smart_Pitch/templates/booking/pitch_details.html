@@ -1,18 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Pitch Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='pitch_details.css') }}">
 </head>
 <body>
 
-<h2>{{ pitch.pitch_name }}</h2>
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+    <a href="{{ url_for('booking.search') }}" class="back-btn">← Back</a>
+</header>
 
-<p><strong>Location:</strong> {{ pitch.location }}</p>
-<p><strong>Price:</strong> {{ pitch.price_per_hour }} EGP/hr</p>
-<p><strong>Description:</strong> {{ pitch.description }}</p>
+<main class="container">
 
-<a href="/booking/create/{{ pitch.pitch_id }}">Book This Pitch</a><br><br>
-<a href="/pitch/search">Back to Search</a>
+    <section class="pitch-header">
+        {% if pitch %}
+        <h1 class="pitch-title">{{ pitch.name }}</h1>
+        <p class="location">📍 {{ pitch.location }}</p>
+        {% else %}
+        <h1 class="pitch-title">Pitch Details</h1>
+        <p class="location">📍 N/A</p>
+        {% endif %}
+    </section>
+
+    <section class="info-grid">
+
+        <div class="pitch-card">
+            <img
+                src="https://assets.goal.com/images/v3/bltd0261058ec2b59e4/1abb23e2d322108fdb475238b7baa951eda78c39.jpg?auto=webp&format=pjpg&width=1920&quality=60"
+                alt="Pitch"
+                class="pitch-image"
+            >
+
+            <div class="pitch-info">
+                <h3>Pitch Information</h3>
+
+                <ul>
+                    <li><strong>Pitch Type:</strong> Football</li>
+                    <li><strong>Size:</strong> 11-a-side (Full Size)</li>
+                    <li><strong>Surface:</strong> Artificial Grass</li>
+                    <li><strong>Lighting:</strong> Available</li>
+                    <li><strong>Changing Rooms:</strong> Yes</li>
+                </ul>
+
+                <p class="description">
+                    Professional football pitch with high-quality turf, night lighting, and modern facilities.
+                </p>
+            </div>
+        </div>
+
+        <div class="booking-box">
+            <h3>Booking Details</h3>
+
+            <div class="price">£{{ pitch.price if pitch else 0 }} <span>/ hour</span></div>
+
+            <p class="availability-title">Available Time Slots</p>
+
+            <div class="slots">
+                <span>08:00 - 10:00</span>
+                <span>10:00 - 12:00</span>
+                <span>14:00 - 16:00</span>
+                <span>18:00 - 20:00</span>
+            </div>
+
+            <a href="{{ url_for('booking.confirm_booking', id=pitch.id if pitch else '') }}" class="book-btn">Book Now</a>
+
+</main>
 
 </body>
 </html>
