@@ -1,23 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
 <body>
 
-<h2>Login</h2>
+  <a class="back-btn" href="{{ url_for('auth.index') }}">← Back</a>
 
-<form method="POST">
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+  <div class="auth-container">
+    <h1>Login</h1>
 
-    <label>Password:</label><br>
-    <input type="password" name="password" required><br><br>
+    {% if error %}
+      <p style="color:red; margin-bottom: 10px;">{{ error }}</p>
+    {% endif %}
 
-    <button type="submit">Login</button>
-</form>
+    <form method="POST" action="{{ url_for('auth.login') }}">
+      <label>Email</label>
+      <input type="email" name="email" required>
 
-<p>Don't have an account? <a href="/auth/register">Register here</a></p>
+      <label>Password</label>
+      <input type="password" name="password" required>
+
+      <button type="submit" class="btn user-btn" style="border:none; cursor:pointer;">
+        Login
+      </button>
+    </form>
+
+    <div class="demo">
+      <p><strong>Demo accounts:</strong></p>
+      <p>User: user@demo.com / 123</p>
+      <p>Owner: owner@demo.com / 123</p>
+      <p>Admin: admin@demo.com / 123</p>
+    </div>
+
+    <p style="margin-top: 14px;">
+      Don't have an account?
+      <a href="{{ url_for('auth.register') }}">Register</a>
+    </p>
+  </div>
 
 </body>
 </html>
