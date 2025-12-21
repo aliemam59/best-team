@@ -1,54 +1,108 @@
-from flask import Blueprint, render_template, request, redirect, session, url_for
-from models.booking import Booking
-from models.pitch import Pitch
-
-booking_bp = Blueprint("booking", __name__, url_prefix="/booking")
+from flask import Blueprint, render_template, session, redirect, url_for, request
+from Smart_Pitch.models.booking import Booking
+from Smart_Pitch.models.pitch import Pitch
 
 
-@booking_bp.route("/create/<int:pitch_id>", methods=["GET", "POST"])
-def create_booking(pitch_id):
-
-    if "user_id" not in session:
+def _require_user():
+    """Redirect to login if not logged in as a normal user."""
+    if session.get("role") != "user":
         return redirect(url_for("auth.login"))
+    return None
 
-    pitch = Pitch.get_by_id(pitch_id)
+booking_bp = Blueprint(
+    "booking",
+    __name__,
+    url_prefix="/booking"
+)
 
-    if not pitch:
-        return "Pitch not found."
+
+def _require_user():
+    """Redirect to login if not logged in as a normal user."""
+    if session.get("role") != "user":
+        return redirect(url_for("auth.login"))
+    return None
+
+
+@booking_bp.route("/search")
+def search():
+    guard = _require_user()
+    if guard:
+        return guard
+
+    return render_template("booking/search.html")
+
+
+@booking_bp.route("/pitch-details")
+def pitch_details():
+    guard = _require_user()
+    if guard:
+        return guard
+
+    pitch_id = request.args.get("id")
+    pitch = None
+    if pitch_id:
+        pitch = Pitch.get_by_id(int(pitch_id))
+    return render_template("booking/pitch_details.html", pitch=pitch)
+
+
+@booking_bp.route("/confirm")
+def confirm_booking():
+    guard = _require_user()
+    if guard:
+        return guard
+
+    pitch_id = request.args.get("id")
+    pitch = None
+    if pitch_id:
+        pitch = Pitch.get_by_id(int(pitch_id))
+    return render_template("booking/booking_page.html", pitch=pitch)
+
+
+@booking_bp.route("/success", methods=["GET","POST"])
+def success():
+    guard = _require_user()
+    if guard:
+        return guard
 
     if request.method == "POST":
-        date = request.form["date"]
-        time_slot = request.form["time_slot"]
+        user_id = session.get("user_id")
+        user_email = session.get("email")
+        pitch_id = int(request.form.get("pitch_id"))
+        pitch_name = request.form.get("pitch_name")
+        date = request.form.get("date")
+        time = request.form.get("time_slot")
+        price = float(request.form.get("price") or 0)
 
-        Booking.create(
-            user_id=session["user_id"],
-            pitch_id=pitch_id,
-            date=date,
-            time_slot=time_slot
-        )
+        Booking.add(user_id, user_email, pitch_id, pitch_name, date, time, price, status="Confirmed")
+        return render_template("booking/booking_success.html")
 
-        return redirect(url_for("booking.my_bookings"))
-
-    return render_template("booking/create_booking.html", pitch=pitch)
+    # GET fallback
+    return render_template("booking/booking_success.html")
 
 
-@booking_bp.route("/my")
+
+
+
+@booking_bp.route("/my-bookings")
 def my_bookings():
+    guard = _require_user()
+    if guard:
+        return guard
 
-    if "user_id" not in session:
-        return redirect(url_for("auth.login"))
-
-    bookings = Booking.get_user_bookings(session["user_id"])
-
+    user_id = session.get("user_id")
+    bookings = Booking.get_by_user(user_id)
     return render_template("booking/my_bookings.html", bookings=bookings)
 
 
-@booking_bp.route("/cancel/<int:booking_id>")
+@booking_bp.route("/cancel/<int:booking_id>", methods=["POST"])
 def cancel_booking(booking_id):
+    guard = _require_user()
+    if guard:
+        return guard
 
-    if "user_id" not in session:
-        return redirect(url_for("auth.login"))
-
-    Booking.cancel(booking_id)
-
+    user_id = session.get("user_id")
+    # ensure booking belongs to current user before deleting
+    b = next((b for b in Booking.get_all() if b["id"] == booking_id), None)
+    if b and b.get("user_id") == user_id:
+        Booking.delete(booking_id)
     return redirect(url_for("booking.my_bookings"))
