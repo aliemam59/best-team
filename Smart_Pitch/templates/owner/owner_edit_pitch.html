@@ -1,9 +1,43 @@
-<h1>Edit Pitch</h1>
-<form method="POST">
-    Name: <input type="text" name="name" value="{{ pitch.name }}" required><br>
-    Location: <input type="text" name="location" value="{{ pitch.location }}" required><br>
-    Type: <input type="text" name="type" value="{{ pitch.type }}" required><br>
-    Price: <input type="number" name="price" value="{{ pitch.price }}" required><br>
-    <button type="submit">Update Pitch</button>
-</form>
-<a href="{{ url_for('owner.owner_dashboard') }}">Back to Dashboard</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Pitch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='owner_edit_pitch.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+    <a href="{{ url_for('owner.dashboard') }}" class="back">← Back to Dashboard</a>
+</header>
+
+<main class="container">
+
+    <h1>Edit Pitch</h1>
+
+    <form class="form" action="{{ url_for('owner.edit_pitch') }}?id={{ pitch.id }}" method="POST">
+
+        <label>Pitch Name</label>
+        <input type="text" name="name" value="{{ pitch.name }}" required>
+
+        <label>Location</label>
+        <input type="text" name="location" value="{{ pitch.location }}" required>
+
+        <label>Price per Hour (£)</label>
+        <input type="number" name="price" value="{{ pitch.price }}" required>
+
+        <label>Status</label>
+        <select name="status" required>
+            <option value="Pending" {% if pitch.status == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="Approved" {% if pitch.status == 'Approved' %}selected{% endif %}>Approved</option>
+            <option value="Confirmed" {% if pitch.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+        </select>
+
+        <button type="submit">Update Pitch</button>
+    </form>
+
+</main>
+
+</body>
+</html>
