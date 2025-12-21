@@ -1,10 +1,27 @@
-from . import db
+from Smart_Pitch.models.user import User
+from Smart_Pitch.models.booking import Booking
+from Smart_Pitch.models.pitch import Pitch
 
-class Admin(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)  # يمكن تخزين hash
-    email = db.Column(db.String(100), unique=True, nullable=False)
 
-    def _repr_(self):
-        return f"<Admin {self.username}>"
+def get_all_users():
+    return User.get_all()
+
+
+def get_all_pitches():
+    return Pitch.get_all()
+
+
+def get_all_bookings():
+    return Booking.get_all()
+
+
+def delete_user(user_id):
+    User.delete(user_id)
+
+
+def delete_pitch(pitch_id):
+    Pitch.delete(pitch_id)
+
+
+def delete_booking(booking_id):
+    Booking.delete(booking_id)
