@@ -1,72 +1,58 @@
-<h1>Admin Dashboard</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+</head>
+<body>
 
-<h2>Users</h2>
-<table border="1" cellpadding="5" cellspacing="0">
-    <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Actions</th>
-    </tr>
-    {% for user in users %}
-    <tr>
-        <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-            <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="POST">
-                <button type="submit">Delete</button>
-            </form>
-            <form action="{{ url_for('admin.remove_spam', user_id=user.id) }}" method="POST">
-                <button type="submit">Remove Spam</button>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+<header class="navbar">
+    <div class="logo">
+        <span>PitchBook</span> Admin
+    </div>
 
-<h2>Pitches</h2>
-<table border="1" cellpadding="5" cellspacing="0">
-    <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Type</th>
-        <th>Price</th>
-        <th>Actions</th>
-    </tr>
-    {% for pitch in pitches %}
-    <tr>
-        <td>{{ pitch.name }}</td>
-        <td>{{ pitch.location }}</td>
-        <td>{{ pitch.type }}</td>
-        <td>{{ pitch.price }}</td>
-        <td>
-            <form action="{{ url_for('admin.delete_pitch', pitch_id=pitch.id) }}" method="POST">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+    <nav>
+        <a href="{{ url_for('admin.dashboard') }}" class="active">Dashboard</a>
+        <a href="{{ url_for('admin.users') }}">Users</a>
+        <a href="{{ url_for('admin.pitches') }}">Pitches</a>
+        <a href="{{ url_for('admin.bookings') }}">Bookings</a>
+    </nav>
 
-<h2>Bookings</h2>
-<table border="1" cellpadding="5" cellspacing="0">
-    <tr>
-        <th>Booking ID</th>
-        <th>User</th>
-        <th>Pitch</th>
-        <th>Date</th>
-        <th>Actions</th>
-    </tr>
-    {% for booking in bookings %}
-    <tr>
-        <td>{{ booking.id }}</td>
-        <td>{{ booking.user_id }}</td>
-        <td>{{ booking.pitch_id }}</td>
-        <td>{{ booking.date }}</td>
-        <td>
-            <form action="{{ url_for('admin.delete_booking', booking_id=booking.id) }}" method="POST">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+    <div class="admin-info">
+        <span>Admin</span>
+        <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <h1>Dashboard Overview</h1>
+    <p class="subtitle">Quick summary of the system status</p>
+
+    <section class="stats">
+        <div class="stat-card">
+            <h3>Total Users</h3>
+            <p class="number">{{ users_count }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Pitches</h3>
+            <p class="number">{{ pitches_count }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Bookings</h3>
+            <p class="number">{{ bookings_count }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Revenue</h3>
+            <p class="number">—</p>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
