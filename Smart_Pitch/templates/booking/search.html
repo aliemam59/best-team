@@ -1,33 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Search Pitches</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}">
 </head>
 <body>
 
-<h2>Search Football Pitches</h2>
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+    <a href="{{ url_for('user.dashboard') }}" class="back-btn">← Back</a>
+</header>
 
-<form method="GET" action="/pitch/search">
-    <label>Location:</label><br>
-    <input type="text" name="location" placeholder="Enter area..." required><br><br>
+<main class="container">
 
-    <button type="submit">Search</button>
-</form>
+    <section class="title-section">
+        <h1 class="main-title">Find Your Perfect Pitch</h1>
+        <p class="subtitle">Search and book football pitches near you easily</p>
+    </section>
 
-{% if pitches %}
-    <h3>Results:</h3>
-    <ul>
-        {% for p in pitches %}
-            <li>
-                <strong>{{ p.pitch_name }}</strong><br>
-                Location: {{ p.location }}<br>
-                Price: {{ p.price_per_hour }} EGP/hr<br>
-                <a href="/pitch/{{ p.pitch_id }}">View Details</a>
-            </li>
-            <hr>
-        {% endfor %}
-    </ul>
-{% endif %}
+    <section class="cards">
+
+        <div class="card">
+            <img src="https://assets.goal.com/images/v3/bltd0261058ec2b59e4/1abb23e2d322108fdb475238b7baa951eda78c39.jpg?auto=webp&format=pjpg&width=1920&quality=60" alt="Pitch">
+            <div class="card-content">
+                <h3>Riverside Sports Complex</h3>
+                <p class="location">📍 Manchester</p>
+                <p class="price">£50 / hour</p>
+                <a href="{{ url_for('booking.pitch_details', id=1) }}" class="btn">View Details</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://media.elbalad.news/2024/10/large/287/1/819.jpg" alt="Pitch">
+            <div class="card-content">
+                <h3>City Center Arena</h3>
+                <p class="location">📍 London</p>
+                <p class="price">£80 / hour</p>
+                <a href="{{ url_for('booking.pitch_details', id=2) }}" class="btn">View Details</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://img.youm7.com/large/s12201115122629.jpg" alt="Pitch">
+            <div class="card-content">
+                <h3>Green Park Pitch</h3>
+                <p class="location">📍 Birmingham</p>
+                <p class="price">£40 / hour</p>
+                <a href="{{ url_for('booking.pitch_details', id=3) }}" class="btn">View Details</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://arabic.sport360.com/wp-content/uploads/2019/03/estadio_santiago_bernabeu-1.jpg" alt="Pitch">
+            <div class="card-content">
+                <h3>Elite Indoor Sports</h3>
+                <p class="location">📍 Manchester</p>
+                <p class="price">£65 / hour</p>
+                <a href="{{ url_for('booking.pitch_details', id=4) }}" class="btn">View Details</a>
+            </div>
+        </div>
+
+    </section>
+
+</main>
 
 </body>
 </html>
