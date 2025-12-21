@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Bookings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_bookings.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        PitchBook <span>Admin</span>
+    </div>
+
+    <nav>
+        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('admin.users') }}">Users</a>
+        <a href="{{ url_for('admin.pitches') }}">Pitches</a>
+        <a href="{{ url_for('admin.bookings') }}" class="active">Bookings</a>
+    </nav>
+
+    <div class="admin-info">
+        <strong>Admin</strong>
+        <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <h1 class="page-title">Bookings Management</h1>
+    <p class="page-desc">View and manage all pitch bookings</p>
+
+    <div class="table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Pitch</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for b in bookings %}
+                {% set status = (b.status if b.status is defined else b["status"]) %}
+                {% set badge_class = "pending" if status in ["Pending"] else ("success" if status in ["Confirmed","Approved"] else "danger") %}
+                <tr>
+                    <td>{{ b.user if b.user is defined else b["user"] }}</td>
+                    <td>{{ b.pitch if b.pitch is defined else b["pitch"] }}</td>
+                    <td>{{ b.date if b.date is defined else b["date"] }}</td>
+                    <td>{{ b.time if b.time is defined else b["time"] }}</td>
+                    <td>£{{ b.price if b.price is defined else b["price"] }}</td>
+                    <td><span class="badge {{ badge_class }}">{{ status }}</span></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>
