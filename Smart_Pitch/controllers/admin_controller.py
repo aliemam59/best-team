@@ -1,47 +1,66 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from models.admin import Admin
-from models.pitch import Pitch
-from models.booking import Booking
-from models.user import User
-from Smart_Pitch import db
+from flask import Blueprint, render_template, session, redirect, url_for
+from Smart_Pitch.models.admin import get_all_users, get_all_pitches, get_all_bookings
 
-admin_bp = Blueprint('admin', __name__)
+admin_bp = Blueprint(
+    "admin",
+    __name__,
+    url_prefix="/admin"
+)
 
-@admin_bp.route('/admin/dashboard')
-def admin_dashboard():
-    users = User.query.all()
-    pitches = Pitch.query.all()
-    bookings = Booking.query.all()
-    return render_template('admin_dashboard.html', users=users, pitches=pitches, bookings=bookings)
 
-@admin_bp.route('/admin/delete_user/<int:user_id>', methods=['POST'])
-def delete_user(user_id):
-    user = User.query.get_or_404(user_id)
-    db.session.delete(user)
-    db.session.commit()
-    flash('User deleted successfully!')
-    return redirect(url_for('admin.admin_dashboard'))
+def _require_admin():
+    """Redirect to login if not logged in as admin."""
+    if session.get("role") != "admin":
+        return redirect(url_for("auth.login"))
+    return None
 
-@admin_bp.route('/admin/delete_pitch/<int:pitch_id>', methods=['POST'])
-def delete_pitch(pitch_id):
-    pitch = Pitch.query.get_or_404(pitch_id)
-    db.session.delete(pitch)
-    db.session.commit()
-    flash('Pitch deleted successfully!')
-    return redirect(url_for('admin.admin_dashboard'))
 
-@admin_bp.route('/admin/delete_booking/<int:booking_id>', methods=['POST'])
-def delete_booking(booking_id):
-    booking = Booking.query.get_or_404(booking_id)
-    db.session.delete(booking)
-    db.session.commit()
-    flash('Booking deleted successfully!')
-    return redirect(url_for('admin.admin_dashboard'))
+@admin_bp.route("/dashboard")
+def dashboard():
+    guard = _require_admin()
+    if guard:
+        return guard
 
-@admin_bp.route('/admin/remove_spam/<int:user_id>', methods=['POST'])
-def remove_spam(user_id):
-    user = User.query.get_or_404(user_id)
-    db.session.delete(user)
-    db.session.commit()
-    flash('Spam account removed successfully!')
-    return redirect(url_for('admin.admin_dashboard'))
+    users = get_all_users()
+    pitches = get_all_pitches()
+    bookings = get_all_bookings()
+
+    return render_template(
+        "admin/admin_dashboard.html",
+        users=users,
+        pitches=pitches,
+        bookings=bookings,
+        users_count=len(users),
+        pitches_count=len(pitches),
+        bookings_count=len(bookings),
+    )
+
+
+@admin_bp.route("/users")
+def users():
+    guard = _require_admin()
+    if guard:
+        return guard
+
+    users_list = get_all_users()
+    return render_template("admin/admin_users.html", users=users_list)
+
+
+@admin_bp.route("/pitches")
+def pitches():
+    guard = _require_admin()
+    if guard:
+        return guard
+
+    pitches_list = get_all_pitches()
+    return render_template("admin/admin_pitches.html", pitches=pitches_list)
+
+
+@admin_bp.route("/bookings")
+def bookings():
+    guard = _require_admin()
+    if guard:
+        return guard
+
+    bookings_list = get_all_bookings()
+    return render_template("admin/admin_bookings.html", bookings=bookings_list)
