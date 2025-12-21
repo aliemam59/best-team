@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Confirmed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='booking.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">PitchBook</div>
+</header>
+
+<main class="container center">
+
+    <div class="success-card">
+        <h1>✅ Booking Confirmed Successfully!</h1>
+        <p>Your pitch has been booked successfully.</p>
+
+        <a href="{{ url_for('booking.search') }}" class="confirm-btn">
+            Back to Search
+        </a>
+        <a href="{{ url_for('booking.my_bookings') }}" class="confirm-btn" style="background:#2d9cdb;margin-left:10px;">
+            View My Bookings
+        </a>
+    </div>
+
+</main>
+
+</body>
+</html>
